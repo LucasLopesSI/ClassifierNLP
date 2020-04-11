@@ -1,0 +1,310 @@
+% 1. Title: Patent Scientific-Tecnologic-Section DataSet
+   % 
+   % 2. Sources:
+   %      (a) Creator: Lucas Lopes Resende, Felipe Furquim
+   %      (b) Donor: USPTO
+   %      (c) Date: February, 2020
+   % 
+   @RELATION Patent
+
+   @ATTRIBUTE tecnologicalsection  {A01,A61,B01,B03,B05,B22,B25,B33,B61,B64,B81,B82,C01,C07,C09,C10,C12,C22,C23,E21,F03,F05,G01,G03,G05,G06,G07,G08,G09,G10,G11,G16,H01,H03,H04,Y02,Y10}
+   @ATTRIBUTE scientificclass   {General Science & Technology,Information & Communication Technologies,Engineering,Physics & Astronomy,Agriculture, Fisheries & Forestry,Economics & Business ,Clinical Medicine,Enabling & Strategic Technologies,Earth & Environmental Sciences,Biology,Chemistry,Public Health & Health Services,Biomedical Research,Social Sciences,Built Environment & Design}
+   
+   @DATA
+H04,General Science & Technology
+H04,Information & Communication Technologies
+G06,General Science & Technology
+G06,Information & Communication Technologies
+H04,Information & Communication Technologies
+H04,Engineering
+H04,General Science & Technology
+G06,General Science & Technology
+H04,General Science & Technology
+E21,Physics & Astronomy
+A01,Agriculture
+A01, Fisheries & Forestry
+C12,Agriculture
+C12, Fisheries & Forestry
+G06,Economics & Business 
+G08,Economics & Business 
+G08,Clinical Medicine
+H01,Enabling & Strategic Technologies
+H01,Agriculture
+H01, Fisheries & Forestry
+A61,Agriculture
+A61, Fisheries & Forestry
+G01,Agriculture
+G01, Fisheries & Forestry
+G06,Engineering
+H04,Engineering
+G01,Earth & Environmental Sciences
+G01,Agriculture
+G01, Fisheries & Forestry
+E21,Agriculture
+E21, Fisheries & Forestry
+E21,Information & Communication Technologies
+E21,Agriculture
+E21, Fisheries & Forestry
+E21,Physics & Astronomy
+E21,Enabling & Strategic Technologies
+C09,Information & Communication Technologies
+C09,Agriculture
+C09, Fisheries & Forestry
+C09,Physics & Astronomy
+C09,Enabling & Strategic Technologies
+C07,Earth & Environmental Sciences
+C12,Earth & Environmental Sciences
+Y02,Earth & Environmental Sciences
+H04,Information & Communication Technologies
+H04,Biology
+G06,Information & Communication Technologies
+G06,Biology
+G05,Chemistry
+G06,Chemistry
+E21,Chemistry
+A61,Clinical Medicine
+A61,Agriculture
+A61, Fisheries & Forestry
+A61,Economics & Business 
+A61,Enabling & Strategic Technologies
+A61,Public Health & Health Services
+A61,Chemistry
+A61,Engineering
+C07,Clinical Medicine
+C07,Agriculture
+C07, Fisheries & Forestry
+C07,Economics & Business 
+C07,Enabling & Strategic Technologies
+C07,Public Health & Health Services
+C07,Chemistry
+C07,Engineering
+H03,Engineering
+H03,Information & Communication Technologies
+G06,Engineering
+G06,Information & Communication Technologies
+A61,Agriculture
+A61, Fisheries & Forestry
+G06,General Science & Technology
+H04,Engineering
+G06,Engineering
+H04,Earth & Environmental Sciences
+G06,Enabling & Strategic Technologies
+G06,General Science & Technology
+G06,Information & Communication Technologies
+A61,Clinical Medicine
+A61,Agriculture
+A61, Fisheries & Forestry
+A61,Biomedical Research
+A61,Clinical Medicine
+G06,General Science & Technology
+G16,Clinical Medicine
+G16,Information & Communication Technologies
+G06,Clinical Medicine
+G06,Information & Communication Technologies
+Y02,Clinical Medicine
+Y02,Information & Communication Technologies
+C07,Chemistry
+C07,Physics & Astronomy
+C07,Clinical Medicine
+G01,General Science & Technology
+C07,Chemistry
+C07,Biology
+C07,Biomedical Research
+C12,Agriculture
+C12, Fisheries & Forestry
+C12,Biology
+E21,Chemistry
+G05,Chemistry
+H04,Information & Communication Technologies
+G06,Information & Communication Technologies
+G06,Information & Communication Technologies
+H04,Information & Communication Technologies
+H03,Information & Communication Technologies
+G05,General Science & Technology
+B25,General Science & Technology
+G06,General Science & Technology
+H04,Information & Communication Technologies
+A61,Clinical Medicine
+G06,Economics & Business 
+A61,Agriculture
+A61, Fisheries & Forestry
+C23,Agriculture
+C23, Fisheries & Forestry
+B22,Agriculture
+B22, Fisheries & Forestry
+C07,Clinical Medicine
+C07,Physics & Astronomy
+G01,Clinical Medicine
+Y02,Clinical Medicine
+B01,Engineering
+H01,Engineering
+B05,Engineering
+B81,Engineering
+G01,Engineering
+A61,Engineering
+B64,Engineering
+F05,Engineering
+F03,Engineering
+Y02,Engineering
+B61,Engineering
+B61,Clinical Medicine
+H04,Information & Communication Technologies
+Y02,Information & Communication Technologies
+G06,Information & Communication Technologies
+G06,Biology
+G06,Agriculture
+G06, Fisheries & Forestry
+G01,Biology
+G01,Agriculture
+G01, Fisheries & Forestry
+B33,Biology
+B33,Agriculture
+B33, Fisheries & Forestry
+G06,General Science & Technology
+G10,General Science & Technology
+B01,Biology
+B03,Biology
+G06,Economics & Business 
+G06,Information & Communication Technologies
+E21,Clinical Medicine
+C12,Agriculture
+C12, Fisheries & Forestry
+C12,Biology
+H04,Information & Communication Technologies
+C22,Agriculture
+C22, Fisheries & Forestry
+C22,Engineering
+G01,Engineering
+E21,Information & Communication Technologies
+G01,Information & Communication Technologies
+G08,Information & Communication Technologies
+G06,Engineering
+G06,Economics & Business 
+G06,Information & Communication Technologies
+G08,Economics & Business 
+G08,Information & Communication Technologies
+G06,Information & Communication Technologies
+G01,Biology
+B03,Biology
+B01,Biology
+G06,Information & Communication Technologies
+G06,Engineering
+H04,Information & Communication Technologies
+G06,Information & Communication Technologies
+G06,Economics & Business 
+G06,Engineering
+G06,Enabling & Strategic Technologies
+H04,General Science & Technology
+G06,General Science & Technology
+G06,Economics & Business 
+G05,Information & Communication Technologies
+B64,Information & Communication Technologies
+G06,Information & Communication Technologies
+G06,Engineering
+G06,Information & Communication Technologies
+B22,Agriculture
+B22, Fisheries & Forestry
+B22,Enabling & Strategic Technologies
+B01,Agriculture
+B01, Fisheries & Forestry
+B01,Enabling & Strategic Technologies
+C23,Agriculture
+C23, Fisheries & Forestry
+C23,Enabling & Strategic Technologies
+G06,Information & Communication Technologies
+H04,Information & Communication Technologies
+H04,Biomedical Research
+G06,Biomedical Research
+A61,Biomedical Research
+A61,Clinical Medicine
+H04,Information & Communication Technologies
+G01,Engineering
+G01,Chemistry
+G01,Social Sciences
+G01,Information & Communication Technologies
+B01,Engineering
+B01,Chemistry
+B01,Social Sciences
+B01,Information & Communication Technologies
+B03,Engineering
+B03,Chemistry
+B03,Social Sciences
+B03,Information & Communication Technologies
+C12,Enabling & Strategic Technologies
+H04,Engineering
+H04,Agriculture
+H04, Fisheries & Forestry
+G06,Information & Communication Technologies
+G06,Social Sciences
+G09,Social Sciences
+G01,Agriculture
+G01, Fisheries & Forestry
+Y10,Agriculture
+Y10, Fisheries & Forestry
+G06,Information & Communication Technologies
+G06,Information & Communication Technologies
+A61,Biomedical Research
+A61,Clinical Medicine
+G06,Economics & Business 
+G06,Information & Communication Technologies
+G08,Economics & Business 
+G08,Information & Communication Technologies
+H01,Agriculture
+H01, Fisheries & Forestry
+H04,Agriculture
+H04, Fisheries & Forestry
+A01,Agriculture
+A01, Fisheries & Forestry
+G06,Economics & Business 
+G06,Information & Communication Technologies
+G08,Economics & Business 
+G08,Information & Communication Technologies
+G01,Biomedical Research
+G01,Clinical Medicine
+Y02,Biomedical Research
+Y02,Clinical Medicine
+G05,Agriculture
+G05, Fisheries & Forestry
+B25,Agriculture
+B25, Fisheries & Forestry
+C12,Agriculture
+C12, Fisheries & Forestry
+C12,Biology
+C01,Enabling & Strategic Technologies
+C10,Enabling & Strategic Technologies
+B82,Enabling & Strategic Technologies
+G03,Agriculture
+G03, Fisheries & Forestry
+G06,Biology
+H04,Biology
+G06,Built Environment & Design
+G06,Information & Communication Technologies
+G05,Engineering
+G06,Information & Communication Technologies
+G05,Physics & Astronomy
+Y10,Physics & Astronomy
+G07,Enabling & Strategic Technologies
+G06,Engineering
+H04,Engineering
+A61,Clinical Medicine
+G06,Information & Communication Technologies
+G06,Agriculture
+G06, Fisheries & Forestry
+G06,Engineering
+H01,Information & Communication Technologies
+H01,Agriculture
+H01, Fisheries & Forestry
+H01,Engineering
+G06,Information & Communication Technologies
+G11,Information & Communication Technologies
+G06,Information & Communication Technologies
+G06,Information & Communication Technologies
+H04,Information & Communication Technologies
+H04,Agriculture
+H04, Fisheries & Forestry
+G06,Information & Communication Technologies
+G06,Agriculture
+G06, Fisheries & Forestry
+A61,Clinical Medicine
+A61,Biomedical Research
+A61,Biomedical Research
