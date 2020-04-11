@@ -154,17 +154,17 @@ public class PatentClassifier {
         for(String[] patent:patents){
             String description = patent[4];
             description = description.replace("."," ").replace(","," ").replace("\"", " ").replace("("," ").replace(")"," ").replace(":"," ").replace(";", " ").replace("-", " ");
-            if(!description.contains("Current U"))
-                System.out.println("Campo "+ClassifyFieldInstance.getField(description));
+//            if(!description.contains("Current U"))
+//                System.out.println("Campo "+ClassifyFieldInstance.getField(description));
         }
         
-        System.out.println("Campo "+ClassifyFieldInstance.getField(text2));
-        System.out.println("Campo "+ClassifyFieldInstance.getField(text3));
-        System.out.println("Campo "+ClassifyFieldInstance.getField(text4));
-        System.out.println("Campo "+ClassifyFieldInstance.getField(text5));
-        System.out.println("Campo "+ClassifyFieldInstance.getField(text6));
-        System.out.println("Campo "+ClassifyFieldInstance.getField(text7));
-        System.out.println("Campo "+ClassifyFieldInstance.getField(text8));
-        System.out.println("Campo "+ClassifyFieldInstance.getField(text9));
+//        System.out.println("Campo "+ClassifyFieldInstance.getField(text2));
+//        System.out.println("Campo "+ClassifyFieldInstance.getField(text3));
+//        System.out.println("Campo "+ClassifyFieldInstance.getField(text4));
+//        System.out.println("Campo "+ClassifyFieldInstance.getField(text5));
+//        System.out.println("Campo "+ClassifyFieldInstance.getField(text6));
+//        System.out.println("Campo "+ClassifyFieldInstance.getField(text7));
+//        System.out.println("Campo "+ClassifyFieldInstance.getField(text8));
+//        System.out.println("Campo "+ClassifyFieldInstance.getField(text9));
     }
 }

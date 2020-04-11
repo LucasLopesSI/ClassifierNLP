@@ -27,67 +27,58 @@ import weka.core.stopwords.StopwordsHandler;
  *
  * @author Lucas
  */
-public class PrepareBagOfWords {
+public class PrepareBagOfWords{
     static HashMap<String,HashMap<String,Double>> frequency_table = new HashMap<>();
     static HashMap<String,Double>total = new HashMap<String,Double>();
+    static int cont=0;
        public static void trainBagOfWordsModel(){
-           
-        InputStream modelIn = null;
-        POSModel model = null;
-        try{
-            modelIn = new FileInputStream("C:\\Users\\Lucas\\Documents\\apache-opennlp-1.9.2\\en-pos-maxent.bin");
-            model = new POSModel(modelIn);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        LemmatizerModel model2 = null;
-        InputStream modelIn2 = null;
-        try{
-            modelIn2 = new FileInputStream("C:\\Users\\Lucas\\Documents\\apache-opennlp-1.9.2\\bin\\en-lemmatizer.bin");
-            model2 = new LemmatizerModel(modelIn2);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
            StopWords.MyStopWordsHandler();
-           String path="C:\\Users\\Lucas\\Desktop\\patents_extraction\\bagOfWordsClassifier\\ClassifierTest2";
+           String path="C:\\Users\\Lucas\\Desktop\\patents_extraction\\bagOfWordsClassifier\\ClassifierTest3";
+           LinkedList<String>linhas = new LinkedList<String>();
             try{
                 BufferedReader br = new BufferedReader(new FileReader(path)); 
-                int cont=0;
                 while(br.ready()){
 
                     try{
                         String linha = br.readLine(); 
-                        linha = linha.toLowerCase();
-                        String[] splited = linha.split(",\"");
-                        if(!frequency_table.containsKey(splited[0])){
-                            frequency_table.put(splited[0], new HashMap<String,Double>());
-                        }
-                        HashMap<String,Double> words = frequency_table.get(splited[0]);
-                        String[]to_add = NLPparser.getNounsInPhrase(splited[1].replace(",", " ").replace("\""," ").replace(";"," "),model);
-                        to_add = NLPparser.getLemaWord(to_add, model2);
-                        for(int j=0;j<to_add.length;j++){
-                            String actual = to_add[j];
-                            actual = actual.replace(" ", "");
-                            boolean adicionou=false;
-                            if(!StopWords.isStopword(actual) && actual.length()>2){
-                                if(words.get(actual)!=null){
-                                    words.put(actual, words.get(actual).doubleValue()+1);
-                                }else{
-                                    words.put(actual,1.0);
-                                }
-                            }
-                         
-                        }
-                        System.out.println(cont);
-                        cont++;
+                        linhas.add(linha);
                     }catch(Exception e){
                         e.printStackTrace();
                     }
                 }
-                
-                
+                int num_thread = 4;
+                LinkedList<CallNLP> threads = new LinkedList<CallNLP>();
+                for(int i=1;i<=num_thread+1;i++){
+                    LinkedList<String>job= new LinkedList<String>();
+                    int tamanho = linhas.size()/num_thread;
+                    for(int j=(i-1)*tamanho;j<i*tamanho;j++){
+                        try{
+                        job.add(linhas.get(j));
+                        }catch(Exception e){}
+                    }
+                    CallNLP a1 = (new CallNLP(job));
+                    threads.add(a1);
+                    a1.start();
+                }
+                for(CallNLP a:threads){
+                    a.join();
+                }
+                for(CallNLP a:threads){
+                    HashMap<String,HashMap<String,Double>> let_frequency_table = a.frequency_table;
+                    for(String key: let_frequency_table.keySet()){
+                        if(frequency_table.get(key)==null){
+                            frequency_table.put(key,new HashMap<String,Double>());
+                        }
+                        HashMap<String,Double> let_freq = let_frequency_table.get(key);
+                        for(String key2:let_freq.keySet()){
+                            if(frequency_table.get(key).get(key2)==null){
+                                frequency_table.get(key).put(key2, let_freq.get(key2));
+                            }else{
+                                frequency_table.get(key).put(key2, frequency_table.get(key).get(key2)+let_freq.get(key2));
+                            }
+                        }
+                    }
+                }
 //                for(String word: frequency_table.keySet()){
 //                    HashMap<String,Double> words = frequency_table.get(word);
 //                    
@@ -147,6 +138,65 @@ class Word{
     public Word(String word) {
         this.word = word;
         this.num = 1;
+    }
+    
+}
+class CallNLP extends Thread{
+    LinkedList<String> linhas;
+    LemmatizerModel model2;
+    POSModel model;
+    HashMap<String,HashMap<String,Double>> frequency_table = new HashMap<>();
+    public CallNLP(LinkedList<String> linhas) {
+        this.linhas = linhas;
+        InputStream modelIn = null;
+        try{
+            modelIn = new FileInputStream("C:\\Users\\Lucas\\Documents\\apache-opennlp-1.9.2\\en-pos-maxent.bin");
+            model = new POSModel(modelIn);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        InputStream modelIn2 = null;
+        try{
+            modelIn2 = new FileInputStream("C:\\Users\\Lucas\\Documents\\apache-opennlp-1.9.2\\bin\\en-lemmatizer.bin");
+            model2 = new LemmatizerModel(modelIn2);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+   
+    @Override
+    public void run() {
+        for(String linha:linhas){
+            try{
+                if(PrepareBagOfWords.cont>300){
+                    break;
+                }
+                linha = linha.toLowerCase();
+                String[] splited = linha.split(",\"");
+                if(!frequency_table.containsKey(splited[0])){
+                    frequency_table.put(splited[0], new HashMap<String,Double>());
+                }
+                HashMap<String,Double> words = frequency_table.get(splited[0]);
+                String[]to_add = NLPparser.getNounsInPhrase(splited[1].replace(",", " ").replace("\""," ").replace(";"," "),model);
+                to_add = NLPparser.getLemaWord(to_add, model2);
+                for(int j=0;j<to_add.length;j++){
+                    String actual = to_add[j];
+                    actual = actual.replace(" ", "");
+                    boolean adicionou=false;
+                    if(!StopWords.isStopword(actual) && actual.length()>2){
+                        if(words.get(actual)!=null){
+                            words.put(actual, words.get(actual).doubleValue()+1);
+                        }else{
+                            words.put(actual,1.0);
+                        }
+                    }
+
+                }
+                System.out.println(PrepareBagOfWords.cont);
+                PrepareBagOfWords.cont++;
+            }catch(Exception e){}
+        }
     }
     
 }
