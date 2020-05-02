@@ -5,10 +5,7 @@
  */
 package patentclassifier;
 
-import edu.stanford.nlp.ling.CoreAnnotations;
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.pipeline.CoreDocument;
-import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -33,7 +30,7 @@ public class PrepareBagOfWords{
     static int cont=0;
        public static void trainBagOfWordsModel(){
            StopWords.MyStopWordsHandler();
-           String path="C:\\Users\\Lucas\\Desktop\\patents_extraction\\bagOfWordsClassifier\\ClassifierTest3";
+           String path="C:\\Users\\Carlos\\Desktop\\github\\ClassifierNLP\\patents_extraction\\bagOfWordsClassifier\\ClassifierTest3.txt";
            LinkedList<String>linhas = new LinkedList<String>();
             try{
                 BufferedReader br = new BufferedReader(new FileReader(path)); 
@@ -79,56 +76,60 @@ public class PrepareBagOfWords{
                         }
                     }
                 }
-//                for(String word: frequency_table.keySet()){
-//                    HashMap<String,Double> words = frequency_table.get(word);
-//                    
-//                    for(String wor : words.keySet()){
-//                        if(total.get(word)!=null){
-//                            total.put(word, total.get(word).doubleValue()+words.get(wor).doubleValue());
-//                        }else{
-//                            total.put(word, 1.0);
-//                        }
-//                    }
-//                }
-////                for(String word: total.keySet()){
-////                    System.out.println(word+" freq: "+total.get(word));
-////                }
-//                
-//                for(String word: frequency_table.keySet()){
-//                    HashMap<String,Double> words = frequency_table.get(word);
-//                    
-//                    for(String wor : words.keySet()){
-//                        if(words.get(wor)!=null){
-//                            words.put(wor, ((double)words.get(wor).doubleValue()/total.get(word)));
-//                        }
-//                    }
-//                }
            }catch(Exception e){
                e.printStackTrace();
            }
        }
        
-       public static void readTrainedModel(String path){
+       public static void readTrainedModel(String[] path){
            try{
-                BufferedReader br = new BufferedReader(new FileReader(path)); 
+               for(int i=0;i<path.length;i++){
+                    BufferedReader br = new BufferedReader(new FileReader(path[i])); 
+                    while(br.ready()){ 
+                        String linha = br.readLine(); 
+                        String[] patent = linha.split("\t");
 
-                while(br.ready()){ 
-                    String linha = br.readLine(); 
-                    String[] patent = linha.split("\t");
-                    
-                    if(frequency_table.get(patent[0].replace("\"",""))==null){
-                        HashMap<String,Double> words = new HashMap<String,Double>();
-                        words.put(patent[1], Double.valueOf(patent[2]));
-                        frequency_table.put(patent[0].replace("\"",""),words);
-                    }
-                    else{
-                        frequency_table.get(patent[0].replace("\"","")).put(patent[1], Double.valueOf(patent[2]));
-                    }
-                } 
-                br.close();
+                        if(frequency_table.get(patent[0].replace("\"",""))==null){
+                            HashMap<String,Double> words = new HashMap<String,Double>();
+                            words.put(patent[1], Double.valueOf(patent[2]));
+                            frequency_table.put(patent[0].replace("\"",""),words);
+                        }
+                        else{
+                            if(frequency_table.get(patent[0].replace("\"","")).get(patent[1])==null)
+                                frequency_table.get(patent[0].replace("\"","")).put(patent[1], Double.valueOf(patent[2]));
+                            else
+                                frequency_table.get(patent[0].replace("\"","")).put(patent[1],frequency_table.get(patent[0].replace("\"","")).get(patent[1])+Double.valueOf(patent[2]));
+                        }
+                    } 
+                    br.close();
+               }
             }catch(Exception e){
                 e.printStackTrace();
             }
+                           for(String word: frequency_table.keySet()){
+                    HashMap<String,Double> words = frequency_table.get(word);
+                    
+                    for(String wor : words.keySet()){
+                        if(total.get(word)!=null){
+                            total.put(word, total.get(word).doubleValue()+words.get(wor).doubleValue());
+                        }else{
+                            total.put(word, 1.0);
+                        }
+                    }
+                }
+//                for(String word: total.keySet()){
+//                    System.out.println(word+" freq: "+total.get(word));
+//                }
+                
+                for(String word: frequency_table.keySet()){
+                    HashMap<String,Double> words = frequency_table.get(word);
+                    
+                    for(String wor : words.keySet()){
+                        if(words.get(wor)!=null){
+                            words.put(wor, ((double)words.get(wor).doubleValue()/total.get(word)));
+                        }
+                    }
+                }
        }
 }
 class Word{
@@ -150,7 +151,7 @@ class CallNLP extends Thread{
         this.linhas = linhas;
         InputStream modelIn = null;
         try{
-            modelIn = new FileInputStream("C:\\Users\\Lucas\\Documents\\apache-opennlp-1.9.2\\en-pos-maxent.bin");
+            modelIn = new FileInputStream("C:\\Users\\Carlos\\Desktop\\github\\ClassifierNLP\\en-pos-maxent.bin");
             model = new POSModel(modelIn);
         }catch(Exception e){
             e.printStackTrace();
@@ -158,7 +159,7 @@ class CallNLP extends Thread{
         
         InputStream modelIn2 = null;
         try{
-            modelIn2 = new FileInputStream("C:\\Users\\Lucas\\Documents\\apache-opennlp-1.9.2\\bin\\en-lemmatizer.bin");
+            modelIn2 = new FileInputStream("C:\\Users\\Carlos\\Desktop\\github\\ClassifierNLP\\en-lemmatizer.bin");
             model2 = new LemmatizerModel(modelIn2);
         }catch(Exception e){
             e.printStackTrace();
@@ -169,9 +170,6 @@ class CallNLP extends Thread{
     public void run() {
         for(String linha:linhas){
             try{
-                if(PrepareBagOfWords.cont>300){
-                    break;
-                }
                 linha = linha.toLowerCase();
                 String[] splited = linha.split(",\"");
                 if(!frequency_table.containsKey(splited[0])){
@@ -206,7 +204,7 @@ class StopWords{
     static HashSet<String> myStopWords;
     static String text;
     public static void MyStopWordsHandler() {
-        String filename="C:\\Users\\Lucas\\Desktop\\patents_extraction\\_stopwords.txt";
+        String filename="C:\\Users\\Carlos\\Desktop\\github\\ClassifierNLP\\patents_extraction\\_stopwords.txt";
         // TODO Auto-generated constructor stub
         myStopWords = new HashSet<String>();
         try{
@@ -233,10 +231,31 @@ class StopWords{
 }
 
 class NLPparser{
+    
+    static LemmatizerModel model2;
+    static POSModel model;
+    public NLPparser() {
+        InputStream modelIn = null;
+        try{
+            modelIn = new FileInputStream("C:\\Users\\Carlos\\Desktop\\github\\ClassifierNLP\\en-pos-maxent.bin");
+            model = new POSModel(modelIn);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        InputStream modelIn2 = null;
+        try{
+            modelIn2 = new FileInputStream("C:\\Users\\Carlos\\Desktop\\github\\ClassifierNLP\\en-lemmatizer.bin");
+            model2 = new LemmatizerModel(modelIn2);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     public static String[] getGramaticalClass(String[]sent){
          InputStream modelIn = null;
         try{
-            modelIn = new FileInputStream("C:\\Users\\Lucas\\Documents\\apache-opennlp-1.9.2\\en-pos-maxent.bin");
+            modelIn = new FileInputStream("C:\\Users\\Carlos\\Desktop\\github\\ClassifierNLP\\en-pos-maxent.bin");
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -255,6 +274,17 @@ class NLPparser{
     public static String[] getLemaWord(String[]words, LemmatizerModel model){
         try {
             LemmatizerME lemmatizer = new LemmatizerME(model);
+          String[] lemmas = lemmatizer.lemmatize(words, getGramaticalClass(words));
+          return lemmas;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static String[] getLemaWord(String[]words){
+        try {
+          LemmatizerME lemmatizer = new LemmatizerME(model2);
           String[] lemmas = lemmatizer.lemmatize(words, getGramaticalClass(words));
           return lemmas;
         }catch(Exception e){

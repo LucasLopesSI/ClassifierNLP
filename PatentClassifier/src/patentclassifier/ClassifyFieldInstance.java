@@ -22,23 +22,31 @@ public class ClassifyFieldInstance {
         String best="";
         String second="";
         String[] palavra_citacao = citation.split(" ");
+        new NLPparser();
+        palavra_citacao = NLPparser.getLemaWord(palavra_citacao);
+        LinkedList<String> palavra_citacao2 = new LinkedList<String>();
+        for(String palavra:palavra_citacao){
+            if(!palavra_citacao2.contains(palavra))
+                palavra_citacao2.add(palavra);
+        }
         double local_count=0;
         LinkedList<Double>sum_weigths = new LinkedList<Double>();
         for(String field:PrepareBagOfWords.frequency_table.keySet()){
             local_count=0;
-            for(String palavra:palavra_citacao){
+            for(String palavra:palavra_citacao2){
                 HashMap<String,Double> a = PrepareBagOfWords.frequency_table.get(field);
-                int peso=0;
+                double peso=0;
                 for(String field1:PrepareBagOfWords.frequency_table.keySet()){
+                    
                     HashMap<String,Double> a1 = PrepareBagOfWords.frequency_table.get(field1);
-                    if(a1.get(palavra)!=null)
+                    if(a1.get(palavra)!=null){
                         peso+= a1.get(palavra);
+                    }
                 }
                 
                 if(a.get(palavra)!=null){
-                    
                     if(peso!=0){
-                            local_count+= (double)a.get(palavra)/Math.pow(peso,2);
+                            local_count+= (double)a.get(palavra)/Math.pow(peso,1);
                     }
                     else{
                         local_count+= (double)a.get(palavra);

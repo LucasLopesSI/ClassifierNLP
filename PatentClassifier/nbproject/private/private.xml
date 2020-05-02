@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/PatentClassifier/src/patentclassifier/PatentClassifier.java</file>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/PatentClassifier/src/patentclassifier/ClassifyFieldInstance.java</file>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/PatentClassifier/src/patentclassifier/PrepareBagOfWords.java</file>
+            <file>file:/C:/Users/Carlos/Desktop/github/ClassifierNLP/PatentClassifier/src/patentclassifier/PatentClassifier.java</file>
+            <file>file:/C:/Users/Carlos/Desktop/github/ClassifierNLP/PatentClassifier/src/patentclassifier/trasnlateText.java</file>
         </group>
     </open-files>
 </project-private>
