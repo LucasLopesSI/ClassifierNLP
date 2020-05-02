@@ -143,6 +143,7 @@ public class PatentClassifier {
 //        while(instances.hasNext())
 //        System.out.println(instances.next());
             path = args[0];
+            chromeDriver = args[1];
             String translate = PatentReader.dataPatentReader.readLensPatentCSV(path);
             trasnlateText.translateToEnglish(translate,path);
             
