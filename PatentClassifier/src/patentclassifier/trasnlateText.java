@@ -44,11 +44,11 @@ public class trasnlateText {
  
             for(String line : texts){
                 try{
-                driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div/div/div[1]/textarea")).sendKeys("# "+line+" #");
-                Thread.sleep(2000);
-                String pagetxt = driver.findElement(By.xpath("/html/body")).getText();
-                driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div/div/div[1]/textarea")).clear();
-                java.nio.file.Files.write(Paths.get(save_result.getAbsolutePath()), (line+"#"+pagetxt.split("#")[1]+"\n").getBytes(), StandardOpenOption.APPEND);
+                    driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div/div/div[1]/textarea")).sendKeys("# "+line+" #");
+                    Thread.sleep(2000);
+                    String pagetxt = driver.findElement(By.xpath("/html/body")).getText();
+                    driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div/div/div[1]/textarea")).clear();
+                    java.nio.file.Files.write(Paths.get(save_result.getAbsolutePath()), (line+"#"+pagetxt.split("#")[1]+"\n").getBytes(), StandardOpenOption.APPEND);
                 }catch(Exception e){
                     java.nio.file.Files.write(Paths.get(save_result.getAbsolutePath()), (line+"#"+line+"\n").getBytes(), StandardOpenOption.APPEND);
                     e.printStackTrace();

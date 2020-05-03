@@ -1,6 +1,8 @@
 package PatentReader;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -39,13 +41,12 @@ public class dataPatentReader {
         LinkedList<LinkedList<String>> patents_data = new LinkedList<LinkedList<String>>();
         String descriptions = "";
         try{
-            Scanner readFile = new Scanner(new File(path));
-            
-            int cont = 0;
-            while(readFile.hasNextLine()){
-                String line = readFile.nextLine();
-                String[]columns_title = null;
+            int cont=0;
+            BufferedReader br = new BufferedReader(new FileReader(new File(path))); 
+            String line="";
+          while ((line = br.readLine()) != null){
                 try{
+                    String[]columns_title = null;
                     if(cont!=0){
                         if(!line.contains("\"")){
                             String[]dados = line.split(",");
@@ -72,6 +73,7 @@ public class dataPatentReader {
                 }
                 cont++;
             }
+            System.out.println(descriptions);
         }catch(Exception e){
             e.printStackTrace();
         }
